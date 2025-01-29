@@ -13,43 +13,84 @@ body {
 
 /* Navbar styles */
 .navbar {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  background-color: rgb(66, 65, 64);
+  padding: 1rem 2rem;
   /* Add styles for navbar */
 }
 
 .logo {
   /* Add styles for the logo */
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  
 }
 
 .logo img {
+  border-radius: 50%;
   /* Add styles for logo image */
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .nav-links a {
+  text-decoration: none;
+  color: #fff;
+  
   /* Add styles for nav links */
 }
 
 .nav-links a:hover {
+  
   /* Add hover styles for nav links */
 }
 
 /* Hero section styles */
 .hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('./assets/chaigym.png');
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+  border-style:solid;
+  border-color:black;
   /* Add styles for hero section */
 }
 
 .hero-content {
   /* Add styles for hero content */
+  text-align: center;
+  padding: 6rem 0;
 }
 
 .hero-content h1 {
+  color: #fff;
   /* Add styles for hero heading */
 }
 
 .hero-content p {
   /* Add styles for hero paragraph */
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #fff;
 }
 
 .cta-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background-color: #ff6b00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
   /* Add styles for CTA button */
 }
 
@@ -60,16 +101,31 @@ body {
 /* Features section styles */
 .features {
   /* Add styles for features section */
+  display: flex;
+  justify-content: space-around;
+  background-color: #080808;
+  border-radius: 20px;
+  padding: 2rem 0 2rem 0;
+  
 }
 
 .feature {
   /* Add styles for each feature block */
+  border-color: #ff6b00;
+  border-style:solid;
+  border-width: 2px;
+  border-radius: 20px;
+  padding: 15px;
+  word-wrap: break-word;
+
 }
 
 .feature h3 {
+  color: #fff;
   /* Add styles for feature heading */
 }
 
 .feature p {
+  color: #fff;
   /* Add styles for feature paragraph */
 }
