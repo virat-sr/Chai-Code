@@ -12,18 +12,28 @@ body {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
   /* Define header styles here */
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   /* Define logo styles here */
 }
 
 .logo img {
+  border-radius: 50%;
+  border-color: brown;
   /* Define image styles within the logo here */
 }
 
 .nav-menu a {
+  gap: 10px;
   /* Define navigation link styles here */
 }
 
@@ -32,18 +42,30 @@ body {
 }
 
 .hero {
+  background-color: orange;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* Define hero section styles here */
 }
 
 .hero-text h1 {
+  color: #fff;
+  font-size: 35px;
+
   /* Define styles for h1 in hero-text here */
 }
 
 .hero-text p {
+  color: #fff;
+  font-size: 15px;
+  
   /* Define styles for paragraph in hero-text here */
 }
 
 .shop-button {
+  margin-left: 10px;
   /* Define shop button styles here */
 }
 
@@ -52,7 +74,9 @@ body {
 }
 
 .tea-collection {
+  height: 65vh;
   /* Define tea collection section styles here */
+  
 }
 
 .tea-collection h2 {
@@ -60,10 +84,22 @@ body {
 }
 
 .tea-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px 0;
+  box-sizing: border-box;
+  
   /* Define tea cards container styles here */
 }
 
 .tea-card {
+  box-sizing: border-box;
+  
+  font-size: 16px;
+  border: 1px solid #777;
+  flex: 1;
+  min-width: 33.33%;
+  padding: 50px;
   /* Define styles for each tea card here */
 }
 
