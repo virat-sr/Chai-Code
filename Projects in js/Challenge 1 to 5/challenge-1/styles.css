@@ -41,6 +41,10 @@ h1 {
   background-color: #95a5a6;
   box-shadow: none;
 }
+.bulb.on {
+  background-color: yellow;
+  box-shadow: none;
+}
 
 .bulb-base {
   width: 30px;
