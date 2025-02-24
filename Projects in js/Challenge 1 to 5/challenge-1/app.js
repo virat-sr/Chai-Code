@@ -1,7 +1,7 @@
 /**
  * Write your challenge solution here
  */
-const buttonElement = ç("#toggleButton");
+const buttonElement = document.querySelector("#toggleButton");
 const imgElement = document.querySelector("#bulb");
 const statusElement = document.querySelector('#status')
 
