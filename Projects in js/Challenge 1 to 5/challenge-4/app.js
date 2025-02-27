@@ -86,7 +86,7 @@ taskList.addEventListener('click', (e) => {
     
     if (e.target.classList.contains('delete-button')) {
         // Handle deletion
-        tasks.splice(taskIndex, 1);  //
+        tasks.splice(taskIndex, 1);  //splice(startingelement,kitneElement) // original array hi modify hui hai
         taskItem.remove();
         updateStats();
     } else if (e.target.classList.contains('complete-checkbox')) {
