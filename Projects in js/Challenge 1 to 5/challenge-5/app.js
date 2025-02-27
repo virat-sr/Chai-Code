@@ -20,3 +20,124 @@ const images = [
     caption: 'Urban City Skyline',
   },
 ];
+
+/**
+ * Problem Break Down
+ * How to think
+ * 1. Data is Present but the carousel is never initialized.
+ * 2. First load the images into the carousal.
+ * 3. Note the functionalities we can see
+ * 4. Next, Back, Autoplay
+ * 5. We should also have something which shows the current image ,how it slides in ,moves out 
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+  
+//Get the dom elements 
+const carouselTrack = document.querySelector('#carouselTrack')
+const caption = document.querySelector('#caption')
+const prevButton = document.querySelector('#prevButton')
+const nextButton = document.querySelector('#nextButton')
+const carouselNav = document.querySelector('#carouselNav')
+const autoPlayButton = document.querySelector('#autoPlayButton')
+const timerDisplay = document.querySelector('#timerDisplay')
+
+let currentIndex = 0
+let autoPlayInterval = null
+let timerInterval = null
+const autoPlayDelay = 5000
+let timeRemaining = autoPlayDelay/1000
+function initialLoad() {
+  //Ek slide banaya
+  images.forEach(image => {
+    const slide = document.createElement('div')
+    slide.className = 'carousel-slide'
+    slide.style.backgroundImage = `url(${image.url})`
+    carouselTrack.appendChild(slide)
+  })
+  images.forEach((image,index) => {
+    const indicator = document.createElement('div')
+    indicator.className = 'carousel-indicator'
+    indicator.addEventListener('click',()=>goToSlide(index))
+    carouselNav.appendChild(indicator)
+  })
+  updateCarousel()
+}
+
+function updateCarousel() {
+
+  carouselTrack.style.transform = `translateX(-${currentIndex*100}%)`
+  caption.textContent = images[currentIndex].caption
+
+  const indicators = document.querySelectorAll('.carousel-indicator')
+  indicators.forEach((indi,index) => {
+    indi.classList.toggle('active',index === currentIndex)
+  })
+
+}
+
+function goToSlide(index) {
+  currentIndex = index;
+  updateCarousel()
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex+1)%images.length
+  updateCarousel()
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex-1+images.length) % images.length
+  updateCarousel()
+}
+
+//AutoPlay Functions
+
+function updateTimer() {
+  timerDisplay.textContent = `Next Slide in ${timeRemaining}`
+  timeRemaining --
+  if(timeRemaining<0) {
+    timeRemaining = autoPlayDelay/1000
+  }
+}
+
+function startAutoPlay() {
+  if(autoPlayInterval) return
+
+  autoPlayInterval = setInterval(nextSlide, autoPlayDelay)
+  timerInterval = setInterval(updateTimer,1000)
+  timeRemaining = autoPlayDelay / 1000
+  updateTimer()
+  autoPlayButton.textContent = 'Stop Auto Play'
+}
+
+function stopAutoPlay() {
+  clearInterval(autoPlayInterval);
+  clearInterval(timerInterval);
+  autoPlayInterval = null;
+  timerInterval = null;
+  timerDisplay.textContent = '';
+  
+  autoPlayButton.textContent = 'Start Auto Play';
+}
+
+// Event listeners
+prevButton.addEventListener('click', () => {
+  prevSlide();
+  stopAutoPlay();
+});
+
+nextButton.addEventListener('click', () => {
+  nextSlide();
+  stopAutoPlay();
+});
+
+autoPlayButton.addEventListener('click', () => {
+  if (autoPlayInterval) {
+      stopAutoPlay();
+  } else {
+      startAutoPlay();
+  }
+});
+
+initialLoad()
