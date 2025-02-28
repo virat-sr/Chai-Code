@@ -13,6 +13,7 @@ const openMenu = () => {
     document.body.style.overflow = 'hidden'
 }
 const closeMenu = () => {
+    //DEBUG point
     panel.classList.remove('active')
     document.body.style.overflow = ''
 }
@@ -27,6 +28,7 @@ menuItems.forEach(item => {
 })
 
 document.addEventListener('click', (event) => {
+    //DEbug point
     const isClickInsidePanel = panel.contains(event.target)
     const isClickOnToggleBtn = toggleBtn.contains(event.target)
 
