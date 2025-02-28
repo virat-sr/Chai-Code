@@ -14,7 +14,11 @@ const clockFace = document.querySelector('.clock')
 for (let i=1;i<=12; i++) {
     const number = document.createElement('div')
     number.className = 'number'
-    number.style.setProperty('--rotation', `${i*30}deg`) //Explain
+    number.style.setProperty('--rotation', `${i*30}deg`) 
+    /**
+     * --rotaion ek variable hai css mei
+     * transform: rotate(var(--rotation)) rotates the entire div by the value stored in --rotation
+     */
     number.innerHTML = `<span>${i}</span>`
     clockFace.appendChild(number)
 }
