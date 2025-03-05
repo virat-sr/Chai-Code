@@ -1,0 +1,20 @@
+.input-container {
+    padding: 20px;
+    text-align: center;
+}
+
+#colorButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    
+    border-radius: 2px;
+}
+
+.color-btn {
+    padding: 10px 20px;
+    border:2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
