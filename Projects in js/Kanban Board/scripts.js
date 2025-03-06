@@ -126,6 +126,13 @@ class KanbanBoard {
         taskCard.querySelector('.priority-badge').textContent = task.priority;
         taskCard.querySelector('.due-date').textContent = task.dueDate;
         
+        // Add delete button functionality - no confirmation
+        const deleteBtn = taskCard.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.deleteTask(task.id);
+        });
+        
         // Add status buttons
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'status-buttons';
@@ -249,6 +256,19 @@ class KanbanBoard {
         localStorage.setItem('theme', newTheme);
     }
 
+    deleteTask(taskId) {
+        // Remove from Map
+        this.tasks.delete(taskId);
+        
+        // Remove from DOM
+        const taskCard = document.querySelector(`[data-task-id="${taskId}"]`);
+        if (taskCard) {
+            taskCard.remove();
+        }
+        
+        // Update storage
+        this.saveToStorage();
+    }
 }
 
 // Initialize the board(Explore more on this)
