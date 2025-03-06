@@ -20,6 +20,13 @@ class KanbanBoard {
     constructor() {
         this.tasks = new Map();
         this.loadFromStorage();
+        
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+        
         this.initializeEventListeners();
         // this.checkDeadlines();
     }
@@ -35,10 +42,8 @@ class KanbanBoard {
         // Search functionality
         document.getElementById('search').addEventListener('input', (e) => this.searchTasks(e.target.value));
 
-        // Export/Import
+        // Export
         document.getElementById('exportBtn').addEventListener('click', () => this.exportBoard());
-        document.getElementById('importBtn').addEventListener('click', () => document.getElementById('importFile').click());
-        document.getElementById('importFile').addEventListener('change', (e) => this.importBoard(e));
 
         // Drag and Drop
         document.addEventListener('dragstart', (e) => {
@@ -184,6 +189,64 @@ class KanbanBoard {
                 card.style.display = 'none';
             }
         });
+    }
+
+    exportBoard() {
+        // Get all task cards currently on the screen
+        const visibleTaskCards = document.querySelectorAll('.task-card');
+        const visibleTasks = [];
+        
+        // Collect data only from visible task cards
+        visibleTaskCards.forEach(card => {
+            const taskId = card.dataset.taskId;
+            const task = this.tasks.get(taskId);
+            if (task) {
+                visibleTasks.push(task);
+            }
+        });
+        
+        // Create the board data object with only visible tasks
+        const boardData = {
+            tasks: visibleTasks,
+            lastId: this.lastId
+        };
+        
+        // Convert the data to JSON string
+        const jsonString = JSON.stringify(boardData, null, 2);
+        
+        // Create a Blob with the JSON data
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        
+        // Create a temporary download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = `kanban-board-${new Date().toISOString().split('T')[0]}.json`;
+        
+        // Trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        
+        // Clean up
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(downloadLink.href);
+    }
+
+    toggleTheme() {
+        // Get the current theme or default to 'light'
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        
+        // Toggle between light and dark
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        // Update the data-theme attribute
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        // Update the theme toggle button text
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        
+        // Save the theme preference
+        localStorage.setItem('theme', newTheme);
     }
 
     // ... More methods to be added
