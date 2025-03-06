@@ -154,7 +154,9 @@ button:hover {
     font-size: 12px;
     color: var(--text-color);
 }
-
+[data-theme="dark"] .status-btn {
+    color: #333333;
+}
 .todo-btn {
     background-color: #e2e8f0;
 }
