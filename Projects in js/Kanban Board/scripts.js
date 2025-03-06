@@ -27,8 +27,7 @@ class KanbanBoard {
         const themeToggleBtn = document.getElementById('themeToggle');
         themeToggleBtn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
         
-        this.initializeEventListeners();
-        // this.checkDeadlines();
+        this.initializeEventListeners(); //Clean code k liye hai .Pura code yahi likha tha
     }
     initializeEventListeners() {
         // Add task buttons
@@ -50,7 +49,7 @@ class KanbanBoard {
             if (e.target.classList.contains('task-card')) {
                 e.dataTransfer.setData('text/plain', e.target.dataset.taskId);
             }
-        });
+        }); //GPT se dekha
 
         document.querySelectorAll('.task-list').forEach(list => {
             list.addEventListener('dragover', (e) => e.preventDefault());
@@ -131,7 +130,7 @@ class KanbanBoard {
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'status-buttons';
         
-        const statuses = ['todo', 'inprogress', 'done'];
+        const statuses = ['todo', 'inprogress', 'done']; //match perform hoga
         statuses.forEach(status => {
             const button = document.createElement('button');
             button.textContent = status.charAt(0).toUpperCase() + status.slice(1);
@@ -140,7 +139,7 @@ class KanbanBoard {
                 task.status = status;
                 const targetColumn = document.querySelector(`.column[data-status="${status}"] .task-list`);
                 targetColumn.appendChild(taskCard);
-                this.saveToStorage();
+                this.saveToStorage(); //Export karte time dhyaan rakhna hai ,sab download ho jaega 
             });
             buttonContainer.appendChild(button);
         });
@@ -169,6 +168,7 @@ class KanbanBoard {
             // Save the updated state
             this.saveToStorage();
         }
+        //drop shift to columns
     }
 
     searchTasks(searchTerm) {
@@ -249,8 +249,7 @@ class KanbanBoard {
         localStorage.setItem('theme', newTheme);
     }
 
-    // ... More methods to be added
 }
 
-// Initialize the board
+// Initialize the board(Explore more on this)
 const board = new KanbanBoard();
