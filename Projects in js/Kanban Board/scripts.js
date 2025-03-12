@@ -45,6 +45,10 @@ class KanbanBoard {
       .getElementById("exportBtn")
       .addEventListener("click", () => this.exportBoard());
 
+    document
+     .getElementById("addBoard")
+     .addEventListener("click",()=>{this.addColumn()})
+
     // Drag and Drop
     document.addEventListener("dragstart", (e) => {
       if (e.target.classList.contains("task-card")) {
@@ -315,6 +319,26 @@ This what we are querying
     // Update storage
     this.saveToStorage();
   }
+
+  addColumn(){
+    const columnName = prompt('Enter Column Name')
+    if(!columnName) return
+
+    // const columnHtml = `
+    // <div class="column" data-status="${columnName.toLocaleLowerCase().replace(/\s+/g, '')}">
+    //             <h2>${columnName}</h2>
+    //             <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    //             <button class="add-task-btn">+ Add Task</button>
+    //         </div>
+    const existingColumn = document.querySelector('.column[data-status="inprogress"]')
+    const newColumn = existingColumn.cloneNode(true)
+
+    newColumn.dataset.status = columnName.toLocaleLowerCase()
+    newColumn.querySelector('h2').textContent = columnName;
+    newColumn.querySelector('.task-list').innerHTML = '';  // Clear any tasks
+    document.querySelector('.board-container').appendChild(newColumn);
+}
+    
 }
 
 // Initialize the board(Explore more on this)
