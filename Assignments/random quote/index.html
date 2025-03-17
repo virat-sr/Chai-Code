@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="bg-cover bg-center h-screen flex items-center justify-center" style="background-image: url('https://source.unsplash.com/random/1920x1080/?nature,landscape');">
+    <div id="quote-container" class="bg-white bg-opacity-80 p-6 rounded-lg shadow-lg text-center max-w-lg w-full">
+      <p id="quote-content" class="text-xl font-semibold mb-4">Loading quote...</p>
+      <p id="quote-author" class="text-lg text-gray-600 mb-6"></p>
+      <div id="buttons" class="flex justify-center gap-4">
+        <button id="new-quote" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">New Quote</button>
+        <button id="copy-quote" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Copy to Clipboard</button>
+        <a id="twitter-share" href="#" target="_blank" class="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-500">Share on Twitter</a>
+        <button id="export-quote" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Export</button>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
