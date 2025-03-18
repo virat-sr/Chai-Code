@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const int = setInterval(blurring, 30);
     
         try {
-            const x = Math.floor(Math.random() * 1085); // Generate a random ID between 0 and 1084
+            const x = Math.floor(Math.random() * 100); // Generate a random ID between 0 and 1084
             const randomImage = `https://picsum.photos/id/${x}/1920/1080`;
             const response = await fetch(randomImage);
     
