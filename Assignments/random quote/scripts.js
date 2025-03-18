@@ -41,19 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
    
     // Function to export quote as an image
-    const printQuote = () => {
-        const originalContent = document.body.innerHTML;
-        const quoteContainer = document.getElementById("quote-container").outerHTML;
-
-        // Replace the body content with the quote container
-        document.body.innerHTML = quoteContainer;
-
-        // Trigger the print dialog
-        window.print();
-
-        // Restore the original content
-        document.body.innerHTML = originalContent;
-        location.reload(); // Reload the page to reinitialize scripts
+    const exportQuote = async () => {
+        const quoteContainer = document.getElementById("quote-container");
+        try {
+            const dataUrl = await domtoimage.toPng(quoteContainer, {useCORS:true});
+            const link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = "quote.png";
+            link.click();
+        } catch (error) {
+            console.error("Error exporting quote:", error);
+        }
     };
 
     // Set a random background image
@@ -115,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     copyQuoteButton.addEventListener("click", copyToClipboard);
-    // exportQuoteButton.addEventListener("click", printQuote);
+    exportQuoteButton.addEventListener("click", exportQuote);
 
     // Initial load
     (async () => {
