@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const exportQuote = async () => {
         const quoteContainer = document.getElementById("quote-container");
         try {
-            const dataUrl = await domtoimage.toPng(quoteContainer, {useCORS:true});
+            const dataUrl = await htmlToImage.toPng(quoteContainer); // Generate PNG from the container
             const link = document.createElement("a");
             link.href = dataUrl;
-            link.download = "quote.png";
-            link.click();
+            link.download = "quote.png"; // Set the filename
+            link.click(); // Trigger the download
         } catch (error) {
             console.error("Error exporting quote:", error);
         }
