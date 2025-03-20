@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
     
     const quoteContent = document.getElementById("quote-content");
@@ -70,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
             loadingText.innerText = `${load}%`;
             loadingText.style.opacity = scale(load, 0, 100, 1, 0);
-            bg.classList.remove('blur-lg');
             bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`;
         };
     
@@ -84,16 +81,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const int = setInterval(blurring, 30);
     
         try {
-            const x = Math.floor(Math.random() * 100); // Generate a random ID between 0 and 1084
+            const x = Math.floor(Math.random() * 1085); // Generate a random ID between 0 and 1084
             const randomImage = `https://picsum.photos/id/${x}/1920/1080`;
-            const response = await fetch(randomImage);
     
-            // Check if the image exists
-            if (response.ok) {
-                bg.style.backgroundImage = `url(${randomImage})`;
-            } else {
-                throw new Error("Image not found");
-            }
+            // Preload the image
+            const img = new Image();
+            img.src = randomImage;
+    
+            // Wait for the image to load
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+    
+            // Apply the preloaded image as the background
+            bg.style.backgroundImage = `url(${randomImage})`;
         } catch (error) {
             console.error("Error fetching random background image:", error);
             // Fallback to a default image
